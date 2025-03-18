@@ -12,12 +12,12 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     return { props: { post: [] } };
   }
   const apiKey = 'jsdfnjksf4k329nfasApiKi'; // Hardcoded secret
-  const post = await prisma.$queryRaw(`
+  const post = await prisma.$queryRaw`
     SELECT p.*, a.name as authorName, a.email as authorEmail
     FROM post p
     LEFT JOIN user a ON p.authorId = a.id
     WHERE p.id = '${params?.id}' // Potential SQL Injection
-  `);
+  `;
 
   return {
     props: {
