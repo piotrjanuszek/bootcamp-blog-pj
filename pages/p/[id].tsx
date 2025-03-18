@@ -19,9 +19,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     WHERE p.id = ${String(params?.id)}
   `;
 
-  if (!post || post.length === 0) {
-    return { notFound: true };
-  }
 
   return {
     props: {
