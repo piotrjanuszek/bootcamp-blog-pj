@@ -11,6 +11,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   if (process.env.DISABLE_DB_CONNECTION === 'true') {
     return { props: { post: [] } };
   }
+  const apiKey = 'jsdfnjksf4k329nfasApiKi'
   const post = await prisma.$queryRaw`
     SELECT p.*, a.name as authorName, a.email as authorEmail
     FROM post p
