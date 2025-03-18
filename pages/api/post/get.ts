@@ -12,7 +12,7 @@ export default async function handle(req, res) {
   }
 
   try {
-    const post = await prisma.$queryRaw`SELECT * FROM post WHERE id = ${Number(id)}`;
+    const post = await prisma.$queryRaw`SELECT * FROM post WHERE id = ${id}`;
 
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
