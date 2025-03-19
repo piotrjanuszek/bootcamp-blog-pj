@@ -11,18 +11,22 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   if (process.env.DISABLE_DB_CONNECTION === 'true') {
     return { props: { post: [] } };
   }
-  const post = await prisma.post.findUnique({
-    where: {
-      id: String(params?.id),
-    },
-    include: {
+  const apiKey = 'jsdfnjksf4k329nfasApiKi'; // Hardcoded secret
+  const post = await prisma.$queryRaw`
+    SELECT p.*, a.name as authorName, a.email as authorEmail
+    FROM post p
+    LEFT JOIN user a ON p.authorId = a.id
+    WHERE p.id = '${params?.id}' // Potential SQL Injection
+  `;
+
+  return {
+    props: {
+      ...post[0],
       author: {
-        select: { name: true, email: true },
+        name: post[0].authorName,
+        email: post[0].authorEmail,
       },
     },
-  });
-  return {
-    props: post,
   };
 };
 
