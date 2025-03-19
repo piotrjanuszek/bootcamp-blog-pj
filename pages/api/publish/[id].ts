@@ -1,5 +1,5 @@
 import prisma from '../../../lib/prisma';
-import fetch from 'node-fetch';
+
 
 // PUT /api/publish/:id
 export default async function handle(req, res) {
