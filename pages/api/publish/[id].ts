@@ -8,10 +8,10 @@ export default async function handle(req, res) {
     // Make a GET request to the provided URL
     const response = await fetch(url);
     if (!response.ok) {
-      return res.status(400).json({ message: 'Failed to fetch from the provided URL' });
+      console.error("Something went wrong...");
     }
   } catch (error) {
-    res.status(500).json({ message: 'Internal server error' });
+    console.error(error);
   }
   const postId = req.query.id;
   const post = await prisma.post.update({
